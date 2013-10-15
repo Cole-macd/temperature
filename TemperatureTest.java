@@ -46,5 +46,42 @@ public class TemperatureTest {
 		Temperature fahrenheitTest = new Temperature(-20, Temperature.Units.FAHRENHEIT);
 		assertEquals("Should be Fahrenheit", Temperature.Units.FAHRENHEIT, fahrenheitTest.getUnits());
 	}
+	
+	@Test
+	public void testChangeUnits() {
+		//test all 6 possible conversions between Celsius, Fahrenheit, and Kelvin
+		
+		//check Celsius -> Fahrenheit
+		Temperature freezingTemp = new Temperature(0.0, Temperature.Units.CELSIUS);
+		freezingTemp.changeUnits(Temperature.Units.FAHRENHEIT);
+		assertEquals("Should be in Fahrenheit", Temperature.Units.FAHRENHEIT, freezingTemp.getUnits());
+		assertEquals("Should equal 32.0", 32.0, freezingTemp.getValue(), PRECISION);
+		//check Fahrenheit -> Kelvin
+		freezingTemp.changeUnits(Temperature.Units.KELVIN);
+		assertEquals("Should be in Kelvin", Temperature.Units.KELVIN, freezingTemp.getUnits());
+		assertEquals("Should equal 273.15", 273.15, freezingTemp.getValue(), PRECISION);
+		
+		//check negative input and Fahrenheit -> Kelvin
+		Temperature negativeInput = new Temperature(-10, Temperature.Units.FAHRENHEIT);
+		negativeInput.changeUnits(Temperature.Units.KELVIN);
+		assertEquals("Should be in Kelvin", Temperature.Units.KELVIN, negativeInput.getUnits());
+		assertEquals("Should equal 249.81666", 249.81666, negativeInput.getValue(), PRECISION);
+		//check Kelvin -> Celsius
+		negativeInput.changeUnits(Temperature.Units.CELSIUS);
+		assertEquals("Should be in Celsius", Temperature.Units.CELSIUS, negativeInput.getUnits());
+		assertEquals("Should equal -23.33333", -23.33333, negativeInput.getValue(), PRECISION);
+		
+		//check precision input and Celsius -> Kelvin
+		Temperature precisionInput = new Temperature(100.1111111, Temperature.Units.CELSIUS);
+		precisionInput.changeUnits(Temperature.Units.KELVIN);
+		assertEquals("Should be in Kelvin", Temperature.Units.KELVIN, precisionInput.getUnits());
+		assertEquals("Should be  373.26111", 373.26111, precisionInput.getValue(), PRECISION);
+		//check Kelvin -> Fahrenheit
+		precisionInput.changeUnits(Temperature.Units.FAHRENHEIT);
+		assertEquals("Should be in Fahrenheit", Temperature.Units.FAHRENHEIT, precisionInput.getUnits());
+		assertEquals("Should be 212.2", 212.2, precisionInput.getValue(), PRECISION);
+				
+	}
+
 
 }

@@ -29,4 +29,22 @@ public class TemperatureTest {
 		Temperature negativeInput = new Temperature(-20, Temperature.Units.CELSIUS);
 		assertEquals("Should equal -20.0", -20.0, negativeInput.getValue(), PRECISION);
 	}
+	
+	@Test
+	public void testGetUnits() {
+		//test 3 possible change unit cases
+		
+		//test Kelvin input
+		Temperature kelvinTest = new Temperature(20, Temperature.Units.KELVIN);
+		assertEquals("Should be Kelvin", Temperature.Units.KELVIN, kelvinTest.getUnits());
+		
+		//test Celsius input
+		Temperature celsiusTest = new Temperature(0, Temperature.Units.CELSIUS);
+		assertEquals("Should be Celsius", Temperature.Units.CELSIUS, celsiusTest.getUnits());
+		
+		//test Fahrenheit input
+		Temperature fahrenheitTest = new Temperature(-20, Temperature.Units.FAHRENHEIT);
+		assertEquals("Should be Fahrenheit", Temperature.Units.FAHRENHEIT, fahrenheitTest.getUnits());
+	}
+
 }
